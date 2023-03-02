@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test-db
+    driver-class-name: org.h2.Driver
+    username: sa
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+  output:
+    ansi:
+      enabled: always
+logging:
+  level:
+    org.hibernate.type: trace
+
+jwt:
+  properties:
+    secret: yohwan
+    expiredAt: 1800000 # 30 * 60000 30분  60000ms(1분)
+    refreshExpiredAt: 604800000 # 7 * 24 * 60 * 60000 7일
+
+solapi:
+  properties:
+    apiKey: nodata
+    apiSecretKey: nodata
+    domain: nodata
+    pfId: nodata
+    firstTemplateId: nodata
+    secondTemplateId: nodata
+    from: nodata

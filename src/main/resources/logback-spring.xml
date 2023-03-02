@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 스프링 프로파일별 로그가 저장되는 디렉토리 위치 -->
+    <property name="LOG_HOME" value="./logs/tmp" />
+    <springProfile name="local">
+        <property name="LOG_HOME" value="c:/logs/waiting" />
+    </springProfile>
+    <springProfile name="dev">
+        <property name="LOG_HOME" value="/home/app/dev-waiting/logs" />
+    </springProfile>
+    <springProfile name="prod">
+        <property name="LOG_HOME" value="/home/app/waiting/logs" />
+    </springProfile>
+
+    <!-- 콘솔 로그 패턴 -->
+    <property name="CONSOLE_LOG_PATTERN" value="%cyan(%d{yyyy.MM.dd HH:mm:ss.SSS}) %highlight(%5level) %magenta([%-21thread]) %magenta(%30.30logger) : [%X{LOG_ID}]%msg%n"/>
+    <!-- 파일 로그 패턴 -->
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy.MM.dd HH:mm:ss.SSS} %5level [%-21thread] %logger : [%X{LOG_ID}]%msg%n"/>
+    <!-- 문자 인코딩 -->
+    <property name="CHAR_SET" value="UTF-8"/>
+
+    <!-- 개발자 코딩 시 console출력 appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>${CHAR_SET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- root file기록 appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/waiting.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${CHAR_SET}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/waiting-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/waiting-error.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${CHAR_SET}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/waiting-error-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <root>
+        <springProfile name="local">
+            <appender-ref ref="STDOUT"/>
+        </springProfile>
+        <springProfile name="dev">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="ERROR"/>
+        </springProfile>
+        <springProfile name="prod">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="ERROR"/>
+        </springProfile>
+    </root>
+</configuration>
