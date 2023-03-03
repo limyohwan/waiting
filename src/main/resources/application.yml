@@ -115,7 +115,7 @@ spring:
 jwt:
   properties:
     secret: yohwan
-    expiredAt: 43200000 # 30 * 60000 30분  60000ms(1분)
+    expiredAt: 1800000 # 30 * 60000 30분  60000ms(1분)
     refreshExpiredAt: 604800000 # 7 * 24 * 60 * 60000 7일
 
 server:
