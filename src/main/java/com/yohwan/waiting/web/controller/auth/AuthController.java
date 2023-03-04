@@ -22,7 +22,6 @@ import javax.validation.Valid;
 public class AuthController {
     private final MemberService memberService;
     private final AuthService authService;
-    private final JwtProperties jwtProperties;
 
     @PostMapping("/api/auth/login")
     public ApiResponseDto<JwtDto> login(@RequestBody @Valid AuthLoginDto authLoginDto, HttpServletResponse response){

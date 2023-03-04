@@ -2,6 +2,7 @@ package com.yohwan.waiting.web.controller.member.dto;
 
 import com.yohwan.waiting.domain.member.MemberStatus;
 import com.yohwan.waiting.domain.member.RoleType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class MemberSaveRequestDto {
     @NotBlank(message = "아이디를 입력해주세요")
     @Pattern(regexp = "[a-zA-Z0-9]{4,20}", message="아이디는 영문,숫자(4~20자리)만 입력가능합니다.")
