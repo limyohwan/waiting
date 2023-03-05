@@ -85,11 +85,14 @@ remotes {
 	}
 }
 
+FileTree appJarPath = fileTree(dir: 'build/libs/waiting.jar')
+
 task scpDev {
 	doLast {
 		ssh.run {
 			session(remotes.webServer) {
-				put from: 'build/libs/waiting.jar', into: '/home/app/dev-waiting/zip'
+				put from: appJarPath.getDir(), into: '/home/app/dev-waiting/zip'
+				executeScript file('script/deploy.sh')
 			}
 		}
 	}
