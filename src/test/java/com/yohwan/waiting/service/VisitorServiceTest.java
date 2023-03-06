@@ -108,18 +108,18 @@ public class VisitorServiceTest {
 
     @Test
     public void 방문객담당설정(){
-        Long wizardMemberId = saveMember("yhlim", "1234", "손흥민", RoleType.ROLE_WIZARD);
+        Long partMemberId = saveMember("yhlim", "1234", "손흥민", RoleType.ROLE_PART);
         Long visitorId = saveVisitor();
         VisitorUpdateRequestDto visitorUpdateRequestDto = new VisitorUpdateRequestDto();
-        visitorUpdateRequestDto.setMemberId(wizardMemberId);
-        visitorUpdateRequestDto.setRoleType(RoleType.ROLE_WIZARD);
+        visitorUpdateRequestDto.setMemberId(partMemberId);
+        visitorUpdateRequestDto.setRoleType(RoleType.ROLE_PART);
         visitorService.assignMember(visitorId, visitorUpdateRequestDto);
 
         em.flush();
         em.clear();
 
         Visitor visitor = visitorRepository.findById(visitorId).get();
-        Assertions.assertThat(visitor.getWizardMember().getId()).isEqualTo(wizardMemberId);
+        Assertions.assertThat(visitor.getPartMember().getId()).isEqualTo(partMemberId);
 
         Long salesMemberId = saveMember("yhlim2", "1234", "이승우", RoleType.ROLE_SALES);
         VisitorUpdateRequestDto visitorUpdateRequestDto2 = new VisitorUpdateRequestDto();
@@ -154,18 +154,18 @@ public class VisitorServiceTest {
 
     @Test
     public void 방문객담당설정후취소(){
-        Long wizardMemberId = saveMember("yhlim", "1234", "손흥민", RoleType.ROLE_WIZARD);
+        Long partMemberId = saveMember("yhlim", "1234", "손흥민", RoleType.ROLE_PART);
         Long visitorId = saveVisitor();
         VisitorUpdateRequestDto visitorUpdateRequestDto = new VisitorUpdateRequestDto();
-        visitorUpdateRequestDto.setMemberId(wizardMemberId);
-        visitorUpdateRequestDto.setRoleType(RoleType.ROLE_WIZARD);
+        visitorUpdateRequestDto.setMemberId(partMemberId);
+        visitorUpdateRequestDto.setRoleType(RoleType.ROLE_PART);
         visitorService.assignMember(visitorId, visitorUpdateRequestDto);
 
         em.flush();
         em.clear();
 
         Visitor visitor = visitorRepository.findById(visitorId).get();
-        Assertions.assertThat(visitor.getWizardMember().getId()).isEqualTo(wizardMemberId);
+        Assertions.assertThat(visitor.getPartMember().getId()).isEqualTo(partMemberId);
 
         Long salesMemberId = saveMember("yhlim2", "1234", "이승우", RoleType.ROLE_SALES);
         VisitorUpdateRequestDto visitorUpdateRequestDto2 = new VisitorUpdateRequestDto();
@@ -199,14 +199,14 @@ public class VisitorServiceTest {
 
 
         VisitorUpdateRequestDto visitorUpdateRequestDto4 = new VisitorUpdateRequestDto();
-        visitorUpdateRequestDto4.setRoleType(RoleType.ROLE_WIZARD);
+        visitorUpdateRequestDto4.setRoleType(RoleType.ROLE_PART);
         visitorService.assignMember(visitorId, visitorUpdateRequestDto4);
 
         em.flush();
         em.clear();
 
         Visitor visitor4 = visitorRepository.findById(visitorId).get();
-        Assertions.assertThat(visitor4.getWizardMember()).isNull();
+        Assertions.assertThat(visitor4.getPartMember()).isNull();
     }
 
     @Test

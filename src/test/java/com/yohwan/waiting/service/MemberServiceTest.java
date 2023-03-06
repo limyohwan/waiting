@@ -104,7 +104,7 @@ public class MemberServiceTest {
         member1.setPassword("1234");
         member1.setName("임요환");
         member1.setMemberStatus(MemberStatus.VALID);
-        member1.setRoleType(RoleType.ROLE_WIZARD);
+        member1.setRoleType(RoleType.ROLE_PART);
 
         Long savedMember1 = memberService.save(member1);
         em.flush();
@@ -132,7 +132,7 @@ public class MemberServiceTest {
         memberSaveRequestDto.setPassword("1234");
         memberSaveRequestDto.setName("임요환");
         memberSaveRequestDto.setMemberStatus(MemberStatus.VALID);
-        memberSaveRequestDto.setRoleType(RoleType.ROLE_WIZARD);
+        memberSaveRequestDto.setRoleType(RoleType.ROLE_PART);
 
         Long savedMember1 = memberService.save(memberSaveRequestDto);
         Member member1 = memberRepository.findById(savedMember1).get();
@@ -160,7 +160,7 @@ public class MemberServiceTest {
         MemberSaveRequestDto member1 = new MemberSaveRequestDto();
         member1.setUsername("yhlim123");
         member1.setName("임요환");
-        member1.setRoleType(RoleType.ROLE_WIZARD);
+        member1.setRoleType(RoleType.ROLE_PART);
         member1.setPassword("1234");
 
         MemberSaveRequestDto member2 = new MemberSaveRequestDto();

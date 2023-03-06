@@ -49,7 +49,7 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/members/**", "/api/codes/**", "/api/visitors/**").hasAnyRole("MANAGER","WIZARD","SALES","USER")
+                .antMatchers("/api/members/**", "/api/codes/**", "/api/visitors/**").hasAnyRole("MANAGER","PART","SALES","USER")
                 .antMatchers("/api/excel/**", "/api/system-setting/**").hasAnyRole("MANAGER")
                 .antMatchers(
                         "/api/auth/**",

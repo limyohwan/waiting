@@ -123,14 +123,14 @@ public class VisitorService {
     }
 
     private void checkAssignedMember(Visitor visitor) {
-        if(visitor.getWizardMember() == null && visitor.getSalesMember() ==null){
+        if(visitor.getPartMember() == null && visitor.getSalesMember() ==null){
             throw new MemberException("담당자를 설정해주세요");
         }
     }
 
     private void sendVisitAlarmMessage(VisitorUpdateRequestDto visitorUpdateRequestDto, Visitor visitor) {
         if(visitorUpdateRequestDto.getVisitorStatus() == VisitorStatus.PREVIEW && !visitor.isSentMessage()){
-            Member member = visitor.getWizardMember() != null ? visitor.getWizardMember() : visitor.getSalesMember();
+            Member member = visitor.getPartMember() != null ? visitor.getPartMember() : visitor.getSalesMember();
             HashMap<String, String> variables = new HashMap<>();
             variables.put("#{number}", visitor.getPhoneNumber().substring(visitor.getPhoneNumber().length() - 4));
             variables.put("#{waitNumber}", String.valueOf(visitor.getWaitNumber()));

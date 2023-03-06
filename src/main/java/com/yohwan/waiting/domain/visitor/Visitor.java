@@ -27,8 +27,8 @@ public class Visitor extends BaseEntity {
     private Integer age;
     private String gender;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wizard_member_id")
-    private Member wizardMember;
+    @JoinColumn(name = "part_member_id")
+    private Member partMember;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sales_member_id")
@@ -61,8 +61,8 @@ public class Visitor extends BaseEntity {
     }
 
     public void assignMember(Member member){
-        if(member.getRoleType().equals(RoleType.ROLE_WIZARD)){
-            this.wizardMember = member;
+        if(member.getRoleType().equals(RoleType.ROLE_PART)){
+            this.partMember = member;
         }else if(member.getRoleType().equals(RoleType.ROLE_SALES)){
             this.salesMember = member;
         }
@@ -79,8 +79,8 @@ public class Visitor extends BaseEntity {
     }
 
     public void deleteAssignedMember(RoleType roleType) {
-        if(roleType.equals(RoleType.ROLE_WIZARD)){
-            this.wizardMember = null;
+        if(roleType.equals(RoleType.ROLE_PART)){
+            this.partMember = null;
         }else if(roleType.equals(RoleType.ROLE_SALES)){
             this.salesMember = null;
         }

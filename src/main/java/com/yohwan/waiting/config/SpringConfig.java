@@ -45,16 +45,13 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Bean
     public OpenAPI openAPI() {
-        Info info = new Info().title("Waiting API")
-                .description("Waiting API 명세서입니다.")
-                .version("v1.0.0");
-        SecurityScheme securityScheme = new SecurityScheme()
-                .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
-                .in(SecurityScheme.In.HEADER).name("Authorization");
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
-                .security(Arrays.asList(securityRequirement))
-                .info(info);
+                .components(new Components().addSecuritySchemes("bearerAuth", new SecurityScheme()
+                        .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
+                        .in(SecurityScheme.In.HEADER).name("Authorization")))
+                .security(Arrays.asList(new SecurityRequirement().addList("bearerAuth")))
+                .info(new Info().title("Waiting API")
+                        .description("Waiting API 명세서입니다.")
+                        .version("v1.0.0"));
     }
 }

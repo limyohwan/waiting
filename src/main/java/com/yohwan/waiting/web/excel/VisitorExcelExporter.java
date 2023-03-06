@@ -29,7 +29,7 @@ public class VisitorExcelExporter {
         CellStyle style = workbook.createCellStyle();
 
         List<String> headers = Arrays.asList("No", "고객명","생성일","핸드폰번호","인원",
-                "유형","연령","성별","위자드담당","영업담당","상태",
+                "유형","연령","성별","알바담당","영업담당","상태",
                 "최종변경일","개인정보수집동의","개인정보수집동의일",
                 "개인정보수집종료일","마케팅동의","마케팅동의일",
                 "마케팅종료일");
@@ -69,7 +69,7 @@ public class VisitorExcelExporter {
             createCell(row, columnCount++, v.getVisitorType().getTitle(), style);
             createCell(row, columnCount++, v.getAge(), style);
             createCell(row, columnCount++, v.getGender(), style);
-            createCell(row, columnCount++, v.getWizardMember() != null ? v.getWizardMember().getName() : "", style);
+            createCell(row, columnCount++, v.getPartMember() != null ? v.getPartMember().getName() : "", style);
             createCell(row, columnCount++, v.getSalesMember() != null ? v.getSalesMember().getName() : "", style);
             createCell(row, columnCount++, v.getVisitorStatus().getTitle(), style);
             createCell(row, columnCount++, v.getModifiedDate().toString(), style);

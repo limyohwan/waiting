@@ -35,7 +35,7 @@ public class VisitorRepositoryImpl implements VisitorRepositoryCustom{
         List<VisitorResponseDto> content = queryFactory
                 .select(Projections.constructor(VisitorResponseDto.class, visitor))
                 .from(visitor)
-                .leftJoin(visitor.wizardMember, member).fetchJoin()
+                .leftJoin(visitor.partMember, member).fetchJoin()
                 .leftJoin(visitor.salesMember, member).fetchJoin()
                 .where(
                         keywordContains(visitorSearch.getKeyword()),
@@ -67,7 +67,7 @@ public class VisitorRepositoryImpl implements VisitorRepositoryCustom{
     @Override
     public List<Visitor> searchForExcel(VisitorSearch visitorSearch) {
         return queryFactory.selectFrom(visitor)
-                .leftJoin(visitor.wizardMember, member).fetchJoin()
+                .leftJoin(visitor.partMember, member).fetchJoin()
                 .leftJoin(visitor.salesMember, member).fetchJoin()
                 .leftJoin(visitor.messageMember, member).fetchJoin()
                 .where(
@@ -109,7 +109,7 @@ public class VisitorRepositoryImpl implements VisitorRepositoryCustom{
     }
 
     private BooleanExpression memberEq(Long memberId) {
-        return memberId != null ? visitor.wizardMember.id.eq(memberId).or(visitor.salesMember.id.eq(memberId)) : null;
+        return memberId != null ? visitor.partMember.id.eq(memberId).or(visitor.salesMember.id.eq(memberId)) : null;
     }
 
     private BooleanExpression visitorStatusEq(VisitorStatus visitorStatus) {

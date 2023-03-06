@@ -19,7 +19,7 @@ public class VisitorResponseDto {
     private VisitorType visitorType;
     private Integer age;
     private String gender;
-    private MemberResponseDto wizardMember;
+    private MemberResponseDto partMember;
     private MemberResponseDto salesMember;
     private VisitorStatus visitorStatus;
     private Boolean isSentMessage;
@@ -35,8 +35,8 @@ public class VisitorResponseDto {
         this.visitorType = visitor.getVisitorType();
         this.age = visitor.getAge();
         this.gender = visitor.getGender();
-        if(visitor.getWizardMember() != null){
-            this.wizardMember = new MemberResponseDto(visitor.getWizardMember());
+        if(visitor.getPartMember() != null){
+            this.partMember = new MemberResponseDto(visitor.getPartMember());
         }
         if(visitor.getSalesMember() != null){
             this.salesMember = new MemberResponseDto(visitor.getSalesMember());
